@@ -1,18 +1,18 @@
 node('built-in')
 {
-   stage('continuous download')
+   stage('continuous download_master')
    {
       git 'https://github.com/intelliqittrainings/maven.git'
     }
-    stage('continuous build')
+    stage('continuous build_master')
    {
      sh 'mvn package'
     }
-    stage('continuous deployment')
+    stage('continuous deployment_master')
    {
     deploy adapters: [tomcat9(credentialsId: '512976cb-e580-4b9a-a8eb-c97961b4f35a', path: '', url: 'http://172.31.17.128:8080')], contextPath: 'testapp', war: '**/*.war'
     }
-    stage('continuous testing')
+    stage('continuous testing_master')
    {
        git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
        sh 'java -jar /var/lib/jenkins/workspace/scriptedpipeline1/testing.jar'

@@ -1,31 +1,31 @@
 @Library('mylibrary')_
 node('built-in')
 {
-    stage('ContDownload')
+    stage('ContDownload_master')
     {
         cicd.gitDownload("maven")
     }
-    stage('ContBuild')
+    stage('ContBuild_master')
     {
         cicd.mavenBuild()
 
     }
-    stage('ContDeployment')
+    stage('ContDeployment_master')
     {
          cicd.tomcatDeploy("ScriptedPipelinewithSharedLibraries","172.31.17.128","testapp")
 
     }
-    stage('ContTesting')
+    stage('ContTesting_master')
     {
         cicd.gitDownload("functionaltesting")
         
     }
-    stage('testcases')
+    stage('testcases_master')
     {
         cicd.runSelenium("ScriptedPipelinewithSharedLibraries")
 
     }
-    stage('ContDelivery')
+    stage('ContDelivery_master')
     {
          cicd.tomcatDeploy("ScriptedPipelinewithSharedLibraries","172.31.22.117","prodapp")
     }
